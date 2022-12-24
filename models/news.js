@@ -7,6 +7,10 @@ const newsSchema = new Schema({
   createdAt: Date,
   author: String,
   content: String,
+  comments : [{
+    author : String,
+    content : String
+     }]
 });
 
 const News = mongoose.model("News", newsSchema);

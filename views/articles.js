@@ -153,7 +153,7 @@ function createNewArticleView() {
           `;
 }
 
-function readArticle(article) {
+function readArticleWithComments(article) {
   return `
       <style>
       .info-button {
@@ -163,12 +163,16 @@ function readArticle(article) {
         padding: 10px 20px;
         border-radius: 4px;
       }
-        .article {
+        .article-container {
           width: 400px;
           margin: 0 auto;
-          padding: 20px;
           border: 1px solid #ccc;
           border-radius: 5px;
+          background-color: #FFC0CB;
+          padding: 20px;
+        }
+        .article {
+          margin-bottom: 20px;
         }
         h1 {
           margin-bottom: 20px;
@@ -176,9 +180,6 @@ function readArticle(article) {
         p {
           margin-bottom: 20px;
         }
-        .article {
-            background-color: #FFC0CB;
-          }
         img {
           width: 50px;
           height: 50px;
@@ -191,16 +192,56 @@ function readArticle(article) {
         img:hover {
           transform: scale(1.1);
         }
+        /* Add styles for the comments section */
+        .comments {
+          margin-top: 20px;
+        }
+        .comment {
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #FFC0CB;
+          padding: 10px;
+          margin-bottom: 10px;
+        }
+        .comment p {
+          margin-bottom: 5px;
+        }
+        .comment p.author {
+          font-weight: bold;
+        }
       </style>
        <img src="/path/to/avatar.jpg" alt="Avatar">
-       <div class="article">
-          <h1>${article.title}</h1>
-          <p>By ${article.author}</p>
-          <p>${article.content}</p>
-          <button class="info-button"><a href="/news">Back</a></button>
-       </div>
-      
-      `;
+       <!-- Wrap the article and comments in a common div -->
+       <div class="article-container">
+          <div class="article">
+            <h1>${article.title}</h1>
+            <p>By ${article.author}</p>
+            <p>${article.content}</p>
+            <button class="info-button"><a href="/news">Back</a></button>
+          </div>
+          <!-- Add the comments section -->
+          <div class="comments">
+            <h2>Comments</h2>
+            ${article.comments
+              .map(
+                (comment) => `
+              <div class="comment">
+                <p class="author">${comment.author}:</p>
+                <p>${comment.content}</p>
+              </div>
+            `
+              )
+              .join("")}
+          </div>
+          <!-- Add form for submitting comments -->
+          <form action="/news/${article._id}/comments?_method=PUT" method="POST" id="comment-form">
+            <label for="author">Name:</label><br>
+            <input type="text" id="author" name="author"><br>
+            <label for="content">Comment:</label><br>
+            <textarea id="content" name="content" rows="5" cols="40"></textarea><br>
+            <input type="submit" value="Submit">
+          </form>
+    `;
 }
 
 function updateArticleView(article) {
@@ -338,10 +379,62 @@ function deleteArticle(article) {
       `;
 }
 
+function readArticle(article) {
+  return `
+      <style>
+      .info-button {
+        background-color: blue;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+      }
+        .article {
+          width: 400px;
+          margin: 0 auto;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+        h1 {
+          margin-bottom: 20px;
+        }
+        p {
+          margin-bottom: 20px;
+        }
+        .article {
+            background-color: #FFC0CB;
+          }
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          transition: all 0.2s ease-in-out;
+          display: block;
+          margin: 0 auto;
+        }
+        img:hover {
+          transform: scale(1.1);
+        }
+      </style>
+       <img src="/path/to/avatar.jpg" alt="Avatar">
+       <div class="article">
+          <h1>${article.title}</h1>
+          <p>By ${article.author}</p>
+          <p>${article.content}</p>
+          <button class="info-button"><a href="/news">Back</a></button>
+          <button class="info-button"><a href="/news/${article._id}/comments">Comments</a></button>
+       </div>
+      
+      `;
+}
+
 module.exports = {
   createNewArticleView,
   createArticleListView,
   readArticle,
   updateArticleView,
   deleteArticle,
+  readArticleWithComments,
 };

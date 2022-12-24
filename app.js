@@ -155,3 +155,33 @@ app.delete("/news/:id", requireLogin, async (req, res) => {
   await News.findByIdAndDelete(id);
   res.redirect("/news");
 });
+
+
+app.get("/news/:id/comments", async (req, res) => {
+  const article = await News.findById(req.params.id);
+  const html = newsView.readArticleWithComments(article);
+  res.send(html);
+});
+
+app.put("/news/:id/comments", async (req, res) => {
+  const { id } = req.params;
+  const { author, content } = req.body;
+
+  // Find the article and update the comments array
+  const article = await News.findByIdAndUpdate(id, {
+    $push: {
+      comments: {
+        author: author,
+        content: content
+      }
+    }
+  }, { new: true });
+
+  res.redirect(`/news/${id}`);
+});
+
+
+
+
+
+
