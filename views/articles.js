@@ -381,44 +381,59 @@ function deleteArticle(article) {
 
 function readArticle(article) {
   return `
-      <style>
-      .info-button {
-        background-color: blue;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 4px;
+  <style>
+  .info-button {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+  }
+    .article {
+      width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 20px;
+    }
+    .article {
+        background-color: #FFC0CB;
       }
-        .article {
-          width: 400px;
-          margin: 0 auto;
-          padding: 20px;
-          border: 1px solid #ccc;
-          border-radius: 5px;
-        }
-        h1 {
-          margin-bottom: 20px;
-        }
-        p {
-          margin-bottom: 20px;
-        }
-        .article {
-            background-color: #FFC0CB;
-          }
-        img {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-          transition: all 0.2s ease-in-out;
-          display: block;
-          margin: 0 auto;
-        }
-        img:hover {
-          transform: scale(1.1);
-        }
-      </style>
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease-in-out;
+      display: block;
+      margin: 0 auto;
+    }
+    img:hover {
+      transform: scale(1.1);
+    }
+      .article-image {
+      display: block;
+      margin: 0 auto;
+      width: 20%;
+      height: 20%;
+      height: auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      /* Add a margin to the bottom of the image */
+      margin-bottom: 20px;
+    }
+  </style>
+
        <img src="/path/to/avatar.jpg" alt="Avatar">
+       <!-- Add the article image -->
+       <img class="article-image" src="https://scontent.fsof1-1.fna.fbcdn.net/v/t1.18169-9/10473369_1563038257250657_1637029864453755271_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=be7NkAVsg6UAX_D3m9s&_nc_ht=scontent.fsof1-1.fna&oh=00_AfDwnP7xfJxunRWc6UNc5TOf1rEEWYdqSvnUTOiVVj2HSg&oe=63CEB20D" alt="Article Image">
        <div class="article">
           <h1>${article.title}</h1>
           <p>By ${article.author}</p>
