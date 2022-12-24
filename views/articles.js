@@ -139,6 +139,8 @@ function createNewArticleView() {
         <h1>Hi Vidko, please feel free to destroy the world !</h1> 
         <button type="text"><a href="/news">All News</a></button>
             <form action="/create" method="POST">
+              <label for="image">Image:</label><br>
+              <input type="text" id="image" name="image"><br>
               <label for="title">Title:</label><br>
               <input required type="text" id="title" name="title"><br>
               <label for="author">Author:</label><br>
@@ -433,7 +435,7 @@ function readArticle(article) {
 
        <img src="/path/to/avatar.jpg" alt="Avatar">
        <!-- Add the article image -->
-       <img class="article-image" src="https://scontent.fsof1-1.fna.fbcdn.net/v/t1.18169-9/10473369_1563038257250657_1637029864453755271_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=be7NkAVsg6UAX_D3m9s&_nc_ht=scontent.fsof1-1.fna&oh=00_AfDwnP7xfJxunRWc6UNc5TOf1rEEWYdqSvnUTOiVVj2HSg&oe=63CEB20D" alt="Article Image">
+       <img class="article-image" src="${article.image}" alt="Article Image">
        <div class="article">
           <h1>${article.title}</h1>
           <p>By ${article.author}</p>

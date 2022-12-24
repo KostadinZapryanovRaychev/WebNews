@@ -10,7 +10,8 @@ const newsSchema = new Schema({
   comments : [{
     author : String,
     content : String
-     }]
+     }],
+  image:String,
 });
 
 const News = mongoose.model("News", newsSchema);

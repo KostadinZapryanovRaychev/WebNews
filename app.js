@@ -69,12 +69,13 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/create", async (req, res) => {
-  const { title, author, content , createdAt } = req.body;
+  const { title, author, content , createdAt , image } = req.body;
   const news = new News({
     title: title,
     author: author,
     content: content,
-    createdAt:createdAt
+    createdAt:createdAt,
+    image:image
   });
   await news.save();
   res.redirect("/news");
