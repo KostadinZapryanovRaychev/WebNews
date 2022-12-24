@@ -1,17 +1,96 @@
 function mainHtmlSkeleton(content){
   return `
   <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-     ${content}
-</body>
-</html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    header {
+      background-color: #333;
+      color: #fff;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: normal;
+    }
+    header ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    header li {
+      margin-left: 20px;
+    }
+    header a {
+      color: #fff;
+      text-decoration: none;
+    }
+    header a:hover {
+      color: #ccc;
+    }
+      /* Add styles for the sidebar */
+      nav {
+        width: 200px;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      nav li {
+        margin-bottom: 10px;
+      }
+      nav a {
+        color: #fff;
+        text-decoration: none;
+      }
+      nav a:hover {
+        color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Add the sidebar -->
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+    <!-- Add the main content -->
+    <header>
+    <h1>Kichuka News</h1>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </header>
+    <main>
+      ${content}
+    </main>
+  </body>
+  </html>
   `;
 }
 
