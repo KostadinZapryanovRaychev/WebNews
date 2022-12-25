@@ -1,4 +1,4 @@
-function mainHtmlSkeleton(content){
+function  mainHtmlSkeleton(content){
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -69,14 +69,6 @@ function mainHtmlSkeleton(content){
     </style>
   </head>
   <body>
-    <!-- Add the sidebar -->
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/contact">Contact</a></li>
-      </ul>
-    </nav>
     <!-- Add the main content -->
     <header>
     <h1>Kichuka News</h1>
@@ -94,28 +86,6 @@ function mainHtmlSkeleton(content){
   `;
 }
 
-function createMainDocType() {
-  return `
-        <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        <h1>Im the Vidko's Site just the begining ;)</h1>
-        <div>
-        <form action="/logout" method="POST">
-
-        <button type="submit">Logout</button>
-      </form>
-        </div>
-    </body>
-    </html>
-        `;
-}
 
 function createRegistrationView() {
   return `
@@ -153,7 +123,7 @@ function createRegistrationView() {
             background-color: #FFC0CB;
           }
       </style>
-          <form action="/" method="POST">
+          <form action="/register" method="POST">
             <label for="name">Name:</label><br>
             <input type="text" id="name" name="name"><br>
             <label for="email">Email:</label><br>
@@ -224,4 +194,4 @@ function createLoginView() {
           `;
 }
 
-module.exports = { createMainDocType, createRegistrationView, createLoginView , mainHtmlSkeleton};
+module.exports = {  createRegistrationView, createLoginView , mainHtmlSkeleton};

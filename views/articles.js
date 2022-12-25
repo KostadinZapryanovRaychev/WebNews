@@ -313,6 +313,8 @@ function updateArticleView(article) {
       <h1>Update Article</h1>
           <form action="/news/${article._id}?_method=PUT" method="POST">
             <input required type="hidden" name="id" value="${article._id}">
+            <label for="image">Image:</label><br>
+            <input required type="text" id="image" name="image" value="${article.image}"><br>
             <label for="title">Title:</label><br>
             <input required type="text" id="title" name="title" value="${article.title}"><br>
             <label for="author">Author:</label><br>
@@ -345,7 +347,7 @@ function deleteArticle(article) {
       }
         .article {
           width: 400px;
-          margin: 0 auto;
+          margin: 20px;
           padding: 20px;
           border: 1px solid #ccc;
           border-radius: 5px;
