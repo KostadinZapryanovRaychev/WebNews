@@ -10,7 +10,7 @@ const style = st.styles();
 module.exports.login = (req, res) => {
   const result = homeView.createLoginView();
   const loggedIn = req.session.user_id;
-  const html = mainContent(result, style,loggedIn);
+  const html = mainContent(result, style,loggedIn );
   res.send(html);
 };
 
@@ -44,12 +44,13 @@ module.exports.register = (req, res) => {
 };
 
 module.exports.registerPost = async (req, res) => {
-  const { email, password, name } = req.body;
+  const { email, password, name ,profilePic } = req.body;
   const hashedPass = await bcrypt.hash(password, 12);
   const user = new User({
     email: email,
     password: hashedPass,
     name: name,
+    profilePic:profilePic
   });
   await user.save();
   req.session.user_id = user._id;

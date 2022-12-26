@@ -82,8 +82,10 @@ module.exports.deleteArticlePost = async (req, res) => {
 
 module.exports.addComment = async (req, res) => {
   const article = await News.findById(req.params.id);
+  const loggedUser =  req.session.user_id
   const html = newsView.readArticleWithComments(article);
-  res.send(html);
+  const result = mainContent(html,style,loggedUser)
+  res.send(result);
 };
 
 module.exports.addCommentPost = async (req, res) => {

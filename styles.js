@@ -1,5 +1,5 @@
-function styles (){
-    return `
+function styles() {
+  return `
     header {
         background-color: #333;
         color: #fff;
@@ -64,7 +64,7 @@ function styles (){
           padding: 20px;
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: flex-start;
         }
         .social-media {
           display: flex;
@@ -89,7 +89,7 @@ function styles (){
           margin-bottom: 5px;
         }
         /* Add styles for the sidebar */
-        aside {
+        .aside-right {
           width: 400px;
           height: 100%;
           position: fixed;
@@ -99,11 +99,22 @@ function styles (){
           padding: 20px;
           box-sizing: border-box;
         }
+
+        .aside-left {
+            width: 400px;
+            height: 100%;
+            position: fixed;
+            left: 0;
+            padding: 20px;
+            box-sizing: border-box;
+          }
+
         aside .about-me {
           text-align: center;
         }
         aside .about-me img {
-          width: 150px;
+          width: 200px;
+          height: 200px;
           border-radius: 50%;
           margin: 20px 0;
         }
@@ -118,6 +129,7 @@ function styles (){
             justify-content: center;
             align-items: center;
             text-align: center;
+            font-size: 20px;
           }
           form {
             width: 400px;
@@ -140,7 +152,7 @@ function styles (){
           }
           button[type="text"] {
             width: 60%;
-            background-color: #4CAF50;
+            background-color: #00ccff;
             color: black;
             padding: 14px 20px;
             margin-bottom: 20px;
@@ -153,7 +165,7 @@ function styles (){
           }
           button[type="submit"] {
             width: 100%;
-            background-color: #4CAF50;
+            background-color: #00ccff;
             color: white;
             padding: 14px 20px;
             margin-bottom: 20px;
@@ -165,8 +177,8 @@ function styles (){
               background-color: #FFC0CB;
             }
           img {
-            width: 50px;
-            height: 50px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             transition: all 0.2s ease-in-out;
@@ -174,9 +186,82 @@ function styles (){
             margin: 0 auto;
           }
           img:hover {
-            transform: scale(1.1);
+            transform: scale(1.3);
           }
-    `
+          .comments {
+            margin-top: 20px;
+          }
+          .comment {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #FFC0CB;
+            padding: 10px;
+            margin-bottom: 10px;
+          }
+          .comment p {
+            margin-bottom: 5px;
+          }
+          .comment p.author {
+            font-weight: bold;
+          }
+
+          .article-container {
+            max-width:100%;
+            width:1000px;
+            margin: 0 auto;
+            border-radius: 5px;
+            background-color: #FFC0CB;
+          }
+
+          .article-inside {
+            width:auto;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+          }
+          .info-button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+          }
+
+          .danger-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+          }
+
+          .flying-picture {
+            /* Other styles for the picture */
+            animation: flying-picture 5s infinite;
+          }
+          
+          @keyframes flying-picture {
+            0% {
+              transform: translateX(0) rotate(0deg);
+            }
+            100% {
+              transform: translateX(100px) rotate(360deg);
+            }
+          }
+
+          .my-h3 {
+            /* Other styles for the my-h3 element */
+            transition: all 0.5s ease-in-out;
+            opacity: 1;
+            visibility: visible;
+          }
+          
+          .my-h3.hidden {
+            opacity: 0;
+            visibility: hidden;
+          }
+
+    `;
 }
 
 module.exports = { styles };

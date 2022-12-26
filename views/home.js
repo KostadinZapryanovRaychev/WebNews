@@ -1,4 +1,4 @@
-function mainHtmlSkeleton(content ,style, logged) {
+function mainHtmlSkeleton(content ,style, logged ) {
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -23,16 +23,24 @@ function mainHtmlSkeleton(content ,style, logged) {
       <li><a href="/contact">Contact</a></li>
     </ul>
   </header>
-  <aside>
+  <aside class="aside-left">
+  <div class="about-me">
+    <h3 class="my-h3">About the Owner</h3>
+    <img src="https://m.media-amazon.com/images/I/611hBRJHcGL.jpg" alt="Profile picture of John Doe" class="flying-picture">
+    </div>
+  </aside>
+
+  <aside class="aside-right">
   <div class="about-me">
     <h3>About the Owner</h3>
     <p>Hi, my name is John Doe and I'm the owner of Kichuka News. I started this website as a passion project to share the latest news and information with my community. I hope you find the content on this website useful and informative.</p>
-    <img src="profile.jpg" alt="Profile picture of John Doe">
+    <img src="https://m.media-amazon.com/images/I/611hBRJHcGL.jpg" alt="Profile picture of John Doe">
   </div>
      ${logged ? `<form action="/logout" method="post">
-     <button type="submit">Log Out</button>
-   </form>`:""}
+                    <button type="submit">Log Out</button>
+                  </form>`:""}
   </aside>
+
     <main>
       ${content}
     </main>
@@ -77,7 +85,7 @@ function createRegistrationView() {
         }
         button[type="submit"] {
           width: 100%;
-          background-color: #4CAF50;
+          background-color: #00ccff;
           color: white;
           padding: 14px 20px;
           margin-bottom: 20px;
@@ -94,6 +102,8 @@ function createRegistrationView() {
             <input required type="text" id="name" name="name"><br>
             <label for="email">Email:</label><br>
             <input required type="text" id="email" name="email"><br>
+            <label for="profilePic">Profile Pic:</label><br>
+            <input type="text" id="profilePic" name="profilePic"><br>
             <label for="password">Password:</label><br>
             <input required type="password" id="password" name="password"><br>
             <button type="submit">Register</button>
@@ -125,7 +135,7 @@ function createLoginView() {
           }
           button[type="submit"] {
             width: 100%;
-            background-color: #4CAF50;
+            background-color: #00ccff;
             color: white;
             padding: 14px 20px;
             margin-bottom: 20px;
@@ -149,7 +159,7 @@ function createLoginView() {
             transform: scale(1.1);
           }
         </style>
-           <img src="https://scontent.fsof9-1.fna.fbcdn.net/v/t1.18169-9/10473369_1563038257250657_1637029864453755271_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=be7NkAVsg6UAX-MSGcY&_nc_ht=scontent.fsof9-1.fna&oh=00_AfBTWiXcjNIfzNxbaRjBoVRp63_V7Gzk-xO-YBWT9qUjGQ&oe=63CD284D" alt="Avatar">
+           <img src="https://dogstreets.com/images/artwork/185666/art.webp" alt="Avatar">
             <form action="/login" method="POST">
               <label for="email">Email:</label><br>
               <input type="text" id="email" name="email"><br>
