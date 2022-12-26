@@ -459,9 +459,9 @@ function readArticle(article) {
     border-radius: 4px;
   }
     .article {
-      width: 400px;
+      width: 1000px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 10px;
       border: 1px solid #ccc;
       border-radius: 5px;
     }

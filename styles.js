@@ -107,6 +107,75 @@ function styles (){
           border-radius: 50%;
           margin: 20px 0;
         }
+
+        .article {
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+          }
+          form {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+          }
+          label {
+            display: block;
+            margin-bottom: 10px;
+          }
+          input[type="text"], input[type="password"], input[type="date"], textarea {
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+          }
+          button[type="text"] {
+            width: 60%;
+            background-color: #4CAF50;
+            color: black;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            border: none;
+            text-align:center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font: 18px Arial, Helvetica, sans-serif;
+          }
+          button[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+          form {
+              background-color: #FFC0CB;
+            }
+          img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease-in-out;
+            display: block;
+            margin: 0 auto;
+          }
+          img:hover {
+            transform: scale(1.1);
+          }
     `
 }
 
