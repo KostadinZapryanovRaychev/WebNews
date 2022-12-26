@@ -6,9 +6,11 @@ const User = require("../models/user");
 const mainContent = homeView.mainHtmlSkeleton;
 const style = st.styles();
 
+
 module.exports.login = (req, res) => {
   const result = homeView.createLoginView();
-  const html = mainContent(result, style);
+  const loggedIn = req.session.user_id;
+  const html = mainContent(result, style,loggedIn);
   res.send(html);
 };
 
@@ -32,7 +34,7 @@ module.exports.loginPost = async (req, res) => {
 module.exports.logout = async (req, res) => {
   req.session.user_id = null;
   req.session.destroy();
-  res.redirect("/login");
+  await res.redirect("/news");
 };
 
 module.exports.register = (req, res) => {

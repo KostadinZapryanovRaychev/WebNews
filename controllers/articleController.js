@@ -11,7 +11,8 @@ const style = st.styles();
 
 module.exports.createArticle = async (req, res) => {
   const result = newsView.createNewArticleView();
-  const html = await mainContent(result, style);
+  const loggedUser =  req.session.user_id
+  const html = await mainContent(result, style,loggedUser);
   res.send(html);
 };
 
@@ -31,11 +32,9 @@ module.exports.createArticlePost = async (req, res) => {
 module.exports.getAllArticles = async (req, res) => {
   // SORTING BY DATE MOST RECENT
   const articles = await News.find({}).sort({ createdAt: -1 });
-  ////
   const loggedUser =  req.session.user_id
-  console.log(loggedUser)
   const result = newsView.createArticleListView(articles, config.dateFormatter, loggedUser);
-  const html = mainContent(result, style);
+  const html = mainContent(result, style,loggedUser);
   res.send(html);
 };
 
@@ -48,7 +47,8 @@ module.exports.getArticle = async (req, res) => {
 
 module.exports.editArticle = async (req, res) => {
   const article = await News.findById(req.params.id);
-  const result = newsView.updateArticleView(article);
+  const loggedUser =  req.session.user_id
+  const result = newsView.updateArticleView(article,loggedUser);
   const html = mainContent(result, style);
   res.send(html);
 };
@@ -69,7 +69,8 @@ module.exports.editArticlePost = async (req, res) => {
 module.exports.deleteArticle = async (req, res) => {
   const article = await News.findById(req.params.id);
   const result = newsView.deleteArticle(article);
-  const html = mainContent(result, style);
+  const loggedUser =  req.session.user_id
+  const html = mainContent(result, style,loggedUser);
   res.send(html);
 };
 
@@ -89,7 +90,6 @@ module.exports.addCommentPost = async (req, res) => {
   const { id } = req.params;
   const { author, content } = req.body;
 
-  // Find the article and update the comments array
   const article = await News.findByIdAndUpdate(
     id,
     {

@@ -1,4 +1,4 @@
-function mainHtmlSkeleton(content ,style) {
+function mainHtmlSkeleton(content ,style, logged) {
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -17,7 +17,7 @@ function mainHtmlSkeleton(content ,style) {
     <header>
     <h1>Kichuka News</h1>
     <ul>
-    <li><a href="/login">Login</a></li>
+      ${!logged ? `<li><a href="/login">Login</a></li>` : ""}
       <li><a href="/">Home</a></li>
       <li><a href="/about">About</a></li>
       <li><a href="/contact">Contact</a></li>
@@ -29,6 +29,9 @@ function mainHtmlSkeleton(content ,style) {
     <p>Hi, my name is John Doe and I'm the owner of Kichuka News. I started this website as a passion project to share the latest news and information with my community. I hope you find the content on this website useful and informative.</p>
     <img src="profile.jpg" alt="Profile picture of John Doe">
   </div>
+     ${logged ? `<form action="/logout" method="post">
+     <button type="submit">Log Out</button>
+   </form>`:""}
   </aside>
     <main>
       ${content}
