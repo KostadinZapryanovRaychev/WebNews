@@ -9,6 +9,8 @@ const methodOverride = require("method-override");
 const app = express();
 const articleController = require("./controllers/articleController");
 const userController = require("./controllers/userController");
+const passport = require("passport");
+const localStrategy = require("passport-local");
 
 mongoose
   .connect("mongodb://localhost:27017/webnews", {
@@ -29,9 +31,25 @@ const homeView = require("./views/home.js");
 const newsView = require("./views/articles.js");
 const config = require("./config.js");
 
+const sessionConfig = {
+  secret: "vidko",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24,
+    maxAge: 1000 * 60 * 60 * 24,
+  },
+};
+
 app.use(express.urlencoded({ extended: true }));
-app.use(session({ secret: "secret", resave: true, saveUninitialized: true }));
+app.use(session(sessionConfig));
 app.use(methodOverride("_method"));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 const mainContent = homeView.mainHtmlSkeleton;
 
@@ -44,11 +62,12 @@ const requireLogin = (req, res, next) => {
   }
 };
 
+
 app.listen(3000, () => {
   console.log("Im listening on port 3000");
 });
 
-app.get("/news", articleController.getAllArticles);
+app.get("/news" , articleController.getAllArticles);
 
 app.post("/create", requireLogin, articleController.createArticlePost);
 
@@ -76,10 +95,8 @@ app.post("/logout", userController.logout);
 
 app.get("/register", userController.register);
 
-app.post("/register",userController.registerPost );
+app.post("/register", userController.registerPost);
 
 app.get("/", (req, res) => {
   res.redirect("/news");
 });
-
-

@@ -1,4 +1,71 @@
-function createArticleListView(articles, dateFn) {
+function createArticleListView(articles, dateFn , loggedUser) {
+  return `
+      <style>
+        .article {
+          width: 400px;
+          margin: 0 auto;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          margin-bottom: 20px;
+        }
+        h1 {
+          margin-bottom: 20px;
+        }
+        p {
+          margin-bottom: 20px;
+        }
+        .article {
+            background-color: #FFC0CB;
+          }
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          transition: all 0.2s ease-in-out;
+          display: block;
+          margin: 0 auto;
+        }
+        img:hover {
+          transform: scale(1.1);
+        }
+        button[type="text"] {
+          width: 100%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin-bottom: 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      </style>
+       <img src="/path/to/avatar.jpg" alt="Avatar">
+       <div class="article"> 
+       ${loggedUser ? `<button type="text"><a href="/create">Create New Article</a></button>` : `<button type="text"><a href="/news">All News</a></button>`}
+       
+       </div>
+       ${articles
+         .map(
+           (article) => `
+         <div class="article">
+            <h1>${article.title}</h1>
+            <p>By ${article.author}</p>
+            <p>${article.content}</p>
+            <p>${dateFn(article.createdAt)}</p>
+            <a href="news/${article._id}">See more</a>
+            ${loggedUser ? `<a href="news/${article._id}/edit">Edit</a>` : ""}
+            ${loggedUser ? `<a href="news/${article._id}/delete">Delete</a>` : ""}
+           
+         </div>
+       `
+         )
+         .join("")}
+      `;
+}
+
+function createArticleListViewNonLoggedIn(articles, dateFn) {
   return `
       <style>
         .article {
@@ -54,8 +121,6 @@ function createArticleListView(articles, dateFn) {
             <p>${article.content}</p>
             <p>${dateFn(article.createdAt)}</p>
             <a href="news/${article._id}">See more</a>
-            <a href="news/${article._id}/edit">Edit</a>
-            <a href="news/${article._id}/delete">Delete</a>
          </div>
        `
          )
@@ -436,7 +501,6 @@ function readArticle(article) {
   </style>
 
        <img src="/path/to/avatar.jpg" alt="Avatar">
-       <!-- Add the article image -->
        <img class="article-image" src="${article.image}" alt="Article Image">
        <div class="article">
           <h1>${article.title}</h1>
@@ -456,4 +520,5 @@ module.exports = {
   updateArticleView,
   deleteArticle,
   readArticleWithComments,
+  createArticleListViewNonLoggedIn
 };

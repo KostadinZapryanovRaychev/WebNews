@@ -1,4 +1,4 @@
-function  mainHtmlSkeleton(content){
+function mainHtmlSkeleton(content ,style) {
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -7,65 +7,9 @@ function  mainHtmlSkeleton(content){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://kit.fontawesome.com/yourcode.js"></script>
     <style>
-    header {
-      background-color: #333;
-      color: #fff;
-      height: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      box-sizing: border-box;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: normal;
-    }
-    header ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-    }
-    header li {
-      margin-left: 20px;
-    }
-    header a {
-      color: #fff;
-      text-decoration: none;
-    }
-    header a:hover {
-      color: #ccc;
-    }
-      /* Add styles for the sidebar */
-      nav {
-        width: 200px;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: #333;
-        color: #fff;
-        padding: 20px;
-        box-sizing: border-box;
-      }
-      nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-      nav li {
-        margin-bottom: 10px;
-      }
-      nav a {
-        color: #fff;
-        text-decoration: none;
-      }
-      nav a:hover {
-        color: #ccc;
-      }
+     ${style}
     </style>
   </head>
   <body>
@@ -73,19 +17,38 @@ function  mainHtmlSkeleton(content){
     <header>
     <h1>Kichuka News</h1>
     <ul>
+    <li><a href="/login">Login</a></li>
       <li><a href="/">Home</a></li>
       <li><a href="/about">About</a></li>
       <li><a href="/contact">Contact</a></li>
     </ul>
   </header>
+  <aside>
+  <div class="about-me">
+    <h3>About the Owner</h3>
+    <p>Hi, my name is John Doe and I'm the owner of Kichuka News. I started this website as a passion project to share the latest news and information with my community. I hope you find the content on this website useful and informative.</p>
+    <img src="profile.jpg" alt="Profile picture of John Doe">
+  </div>
+  </aside>
     <main>
       ${content}
     </main>
+    <footer>
+    <div class="social-media">
+      <a href="#"><i class="fa fa-facebook-square"></i></a>
+      <a href="#"><i class="fa fa-twitter-square"></i></a>
+      <a href="#"><i class="fa fa-instagram"></i></a>
+    </div>
+    <div class="contact-us">
+      <h3>Contact Us</h3>
+      <p>Phone: 555-555-5555</p>
+      <p>Email: info@kichukanews.com</p>
+    </div>
+    </footer>
   </body>
   </html>
   `;
 }
-
 
 function createRegistrationView() {
   return `
@@ -125,11 +88,11 @@ function createRegistrationView() {
       </style>
           <form action="/register" method="POST">
             <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name"><br>
+            <input required type="text" id="name" name="name"><br>
             <label for="email">Email:</label><br>
-            <input type="text" id="email" name="email"><br>
+            <input required type="text" id="email" name="email"><br>
             <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password"><br>
+            <input required type="password" id="password" name="password"><br>
             <button type="submit">Register</button>
           </form>
         `;
@@ -194,4 +157,4 @@ function createLoginView() {
           `;
 }
 
-module.exports = {  createRegistrationView, createLoginView , mainHtmlSkeleton};
+module.exports = { createRegistrationView, createLoginView, mainHtmlSkeleton };

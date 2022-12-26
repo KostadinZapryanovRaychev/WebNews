@@ -1,15 +1,17 @@
 const homeView = require("../views/home.js");
 const newsView = require("../views/articles.js");
+const st = require("../styles");
 const config = require("../config.js");
 const path = require("path");
 
 const User = require("../models/user");
 const News = require("../models/news");
 const mainContent = homeView.mainHtmlSkeleton;
+const style = st.styles();
 
 module.exports.createArticle = async (req, res) => {
   const result = newsView.createNewArticleView();
-  const html = await mainContent(result);
+  const html = await mainContent(result, style);
   res.send(html);
 };
 
@@ -29,10 +31,14 @@ module.exports.createArticlePost = async (req, res) => {
 module.exports.getAllArticles = async (req, res) => {
   // SORTING BY DATE MOST RECENT
   const articles = await News.find({}).sort({ createdAt: -1 });
-  const result = newsView.createArticleListView(articles, config.dateFormatter);
-  const html = mainContent(result);
+  ////
+  const loggedUser =  req.session.user_id
+  console.log(loggedUser)
+  const result = newsView.createArticleListView(articles, config.dateFormatter, loggedUser);
+  const html = mainContent(result, style);
   res.send(html);
 };
+
 
 module.exports.getArticle = async (req, res) => {
   const article = await News.findById(req.params.id);
@@ -43,7 +49,7 @@ module.exports.getArticle = async (req, res) => {
 module.exports.editArticle = async (req, res) => {
   const article = await News.findById(req.params.id);
   const result = newsView.updateArticleView(article);
-  const html = mainContent(result);
+  const html = mainContent(result, style);
   res.send(html);
 };
 
@@ -63,7 +69,7 @@ module.exports.editArticlePost = async (req, res) => {
 module.exports.deleteArticle = async (req, res) => {
   const article = await News.findById(req.params.id);
   const result = newsView.deleteArticle(article);
-  const html = mainContent(result);
+  const html = mainContent(result, style);
   res.send(html);
 };
 
@@ -99,4 +105,3 @@ module.exports.addCommentPost = async (req, res) => {
 
   res.redirect(`/news/${id}`);
 };
-
