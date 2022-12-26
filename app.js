@@ -2,13 +2,12 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const User = require("./models/user");
-const News = require("./models/news");
-const bcrypt = require("bcrypt");
 const session = require("express-session");
 const methodOverride = require("method-override");
 const app = express();
 const articleController = require("./controllers/articleController");
 const userController = require("./controllers/userController");
+const advirtiseController = require("./controllers/advirtiseController");
 const passport = require("passport");
 const localStrategy = require("passport-local");
 
@@ -28,8 +27,6 @@ mongoose
 app.set("views", path.join(__dirname, "views"));
 
 const homeView = require("./views/home.js");
-const newsView = require("./views/articles.js");
-const config = require("./config.js");
 
 const sessionConfig = {
   secret: "vidko",
@@ -51,9 +48,7 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-const mainContent = homeView.mainHtmlSkeleton;
-
-// MIDDLEWARE
+//MiDDLEWARE
 const requireLogin = (req, res, next) => {
   if (!req.session.user_id) {
     return res.redirect("/login");
@@ -62,12 +57,11 @@ const requireLogin = (req, res, next) => {
   }
 };
 
-
 app.listen(3000, () => {
   console.log("Im listening on port 3000");
 });
 
-app.get("/news" , articleController.getAllArticles);
+app.get("/news", articleController.getAllArticles);
 
 app.post("/create", requireLogin, articleController.createArticlePost);
 
@@ -96,6 +90,18 @@ app.post("/logout", userController.logout);
 app.get("/register", userController.register);
 
 app.post("/register", userController.registerPost);
+
+app.get("/advirtise", requireLogin, advirtiseController.createAdvirtise);
+
+app.post("/advirtise", requireLogin, advirtiseController.createAdvirtisePost);
+
+app.get("/advirtises", requireLogin, advirtiseController.getAllAdvirtises);
+
+app.delete(
+  "/advirtises/:id",
+  requireLogin,
+  advirtiseController.deleteAdvirtise
+);
 
 app.get("/", (req, res) => {
   res.redirect("/news");

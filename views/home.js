@@ -1,4 +1,4 @@
-function mainHtmlSkeleton(content ,style, logged ) {
+function mainHtmlSkeleton(content, style, logged, advirtises) {
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -27,6 +27,10 @@ function mainHtmlSkeleton(content ,style, logged ) {
   <div class="about-me">
     <h3 class="my-h3">About the Owner</h3>
     <img src="https://m.media-amazon.com/images/I/611hBRJHcGL.jpg" alt="Profile picture of John Doe" class="flying-picture">
+    
+    ${advirtises}
+
+    ${logged ? `<a href="/advirtises">All Advirtisement</a>` : ""}
     </div>
   </aside>
 
@@ -36,9 +40,13 @@ function mainHtmlSkeleton(content ,style, logged ) {
     <p>Hi, my name is John Doe and I'm the owner of Kichuka News. I started this website as a passion project to share the latest news and information with my community. I hope you find the content on this website useful and informative.</p>
     <img src="https://m.media-amazon.com/images/I/611hBRJHcGL.jpg" alt="Profile picture of John Doe">
   </div>
-     ${logged ? `<form action="/logout" method="post">
+     ${
+       logged
+         ? `<form action="/logout" method="post">
                     <button type="submit">Log Out</button>
-                  </form>`:""}
+                  </form>`
+         : ""
+     }
   </aside>
 
     <main>
