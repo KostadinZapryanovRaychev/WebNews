@@ -70,7 +70,7 @@ app.get("/news", articleController.getAllArticles);
 
 app.get("/world", articleController.getAllWorldArticles);
 
-app.get("/kichuka", articleController.getAllKichukadArticles);
+app.get("/kichuka", articleController.getAllKichukaArticles);
 
 app.post("/create", requireLogin, articleController.createArticlePost);
 

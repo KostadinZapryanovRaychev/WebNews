@@ -19,14 +19,14 @@ module.exports.createArticle = async (req, res) => {
 };
 
 module.exports.createArticlePost = async (req, res) => {
-  const { title, author, content, createdAt, image ,category} = req.body;
+  const { title, author, content, createdAt, image, category } = req.body;
   const news = new News({
     title: title,
     author: author,
     content: content,
     createdAt: createdAt,
     image: image,
-    category:category
+    category: category,
   });
   await news.save();
   res.redirect("/news");
@@ -35,7 +35,7 @@ module.exports.createArticlePost = async (req, res) => {
 module.exports.getAllArticles = async (req, res) => {
   // SORTING BY DATE MOST RECENT
   const articles = await News.find({}).sort({ createdAt: -1 });
-  const alladAvirtises = await Advirtise.find({})
+  const alladAvirtises = await Advirtise.find({});
   const firsTAdvirtise = alladAvirtises[0];
   const loggedUser = req.session.user_id;
   const advirtises = advirtiseView.getAdvirtiseView(firsTAdvirtise);
@@ -47,12 +47,12 @@ module.exports.getAllArticles = async (req, res) => {
   const html = mainContent(result, style, loggedUser, advirtises);
   res.send(html);
 };
-
 
 module.exports.getAllWorldArticles = async (req, res) => {
-  
-  const articles = await News.find({ category: "World news" }).sort({ createdAt: -1 });
-  const alladAvirtises = await Advirtise.find({})
+  const articles = await News.find({ category: "World news" }).sort({
+    createdAt: -1,
+  });
+  const alladAvirtises = await Advirtise.find({});
   const firsTAdvirtise = alladAvirtises[0];
   const loggedUser = req.session.user_id;
   const advirtises = advirtiseView.getAdvirtiseView(firsTAdvirtise);
@@ -65,10 +65,11 @@ module.exports.getAllWorldArticles = async (req, res) => {
   res.send(html);
 };
 
-module.exports.getAllKichukadArticles = async (req, res) => {
-  
-  const articles = await News.find({ category: "Kichuka news" }).sort({ createdAt: -1 });
-  const alladAvirtises = await Advirtise.find({})
+module.exports.getAllKichukaArticles = async (req, res) => {
+  const articles = await News.find({ category: "Kichuka news" }).sort({
+    createdAt: -1,
+  });
+  const alladAvirtises = await Advirtise.find({});
   const firsTAdvirtise = alladAvirtises[0];
   const loggedUser = req.session.user_id;
   const advirtises = advirtiseView.getAdvirtiseView(firsTAdvirtise);
@@ -80,7 +81,6 @@ module.exports.getAllKichukadArticles = async (req, res) => {
   const html = mainContent(result, style, loggedUser, advirtises);
   res.send(html);
 };
-
 
 module.exports.getArticle = async (req, res) => {
   const article = await News.findById(req.params.id);
@@ -98,14 +98,14 @@ module.exports.editArticle = async (req, res) => {
 
 module.exports.editArticlePost = async (req, res) => {
   const { id } = req.params;
-  const { title, author, content, createdAt, image ,category} = req.body;
+  const { title, author, content, createdAt, image, category } = req.body;
   const article = await News.findByIdAndUpdate(id, {
     title: title,
     author: author,
     content: content,
     createdAt: createdAt,
     image: image,
-    category:category
+    category: category,
   });
   res.redirect("/news");
 };
@@ -151,10 +151,9 @@ module.exports.addCommentPost = async (req, res) => {
       },
       { new: true }
     );
-  
+
     res.redirect(`/news/${id}`);
   } else {
     res.redirect(`/news/${id}`);
   }
-
 };
