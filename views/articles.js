@@ -71,22 +71,22 @@ function readArticleWithComments(article) {
     <script src="https://kit.fontawesome.com/yourcode.js"></script>
   </head>
   <body>
-    <img src="${article.image}" alt="Article image">
+    <img src="${article?.image}" alt="Article image">
     <div class="article-container">
       <div class="article-inside">
-        <h1>${article.title}</h1>
-        <p>By ${article.author}</p>
-        <p>${article.content}</p>
+        <h1>${article?.title}</h1>
+        <p>By ${article?.author}</p>
+        <p>${article?.content}</p>
         <button class="info-button"><a href="/news">Back</a></button>
       </div>
       <div class="comments">
         <h2>Comments</h2>
-        ${article.comments
+        ${article?.comments
           .map(
             (comment) => `
             <div class="comment">
-              <p class="author">${comment.author}:</p>
-              <p>${comment.content}</p>
+              <p class="author">${comment?.author}:</p>
+              <p>${comment?.content}</p>
             </div>
           `
           )
@@ -97,9 +97,9 @@ function readArticleWithComments(article) {
         article._id
       }/comments?_method=PUT" method="POST" id="comment-form">
         <label for="author">Name:</label><br>
-        <input type="text" id="author" name="author"><br>
+        <input required type="text" id="author" name="author"><br>
         <label for="content">Comment:</label><br>
-        <textarea id="content" name="content" rows="5" cols="40"></textarea><br>
+        <textarea required id="content" name="content" rows="5" cols="40"></textarea><br>
         <button class="info-button" type="submit">Add comment</button>
       </form>
     </div>
@@ -173,14 +173,14 @@ function updateArticleView(article) {
         }
       </style>
       <h1>Update Article</h1>
-          <form action="/news/${article._id}?_method=PUT" method="POST">
-            <input required type="hidden" name="id" value="${article._id}">
+          <form action="/news/${article?._id}?_method=PUT" method="POST">
+            <input required type="hidden" name="id" value="${article?._id}">
             <label for="image">Image:</label><br>
-            <input required type="text" id="image" name="image" value="${article.image}"><br>
+            <input required type="text" id="image" name="image" value="${article?.image}"><br>
             <label for="title">Title:</label><br>
-            <input required type="text" id="title" name="title" value="${article.title}"><br>
+            <input required type="text" id="title" name="title" value="${article?.title}"><br>
             <label for="author">Author:</label><br>
-            <input required type="text" id="author" name="author" value="${article.author}"><br>
+            <input required type="text" id="author" name="author" value="${article?.author}"><br>
             <label for="category">Category:</label><br>
             <select id="category" name="category">
             <option value="Kichuka news">Kichuka news</option>
@@ -270,11 +270,11 @@ function readArticle(article) {
   </style>
 
        <img src="https://m.media-amazon.com/images/I/611hBRJHcGL.jpg" alt="Avatar">
-       <img class="article-image" src="${article.image}" alt="Article Image">
+       <img class="article-image" src="${article?.image}" alt="Article Image">
        <div class="article">
-          <h1>${article.title}</h1>
-          <p>By ${article.author}</p>
-          <p>${article.content}</p>
+          <h1>${article?.title}</h1>
+          <p>By ${article?.author}</p>
+          <p>${article?.content}</p>
           <button class="info-button"><a href="/news">Back</a></button>
           <button class="info-button"><a href="/news/${article._id}/comments">Comments</a></button>
        </div>
