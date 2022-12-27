@@ -17,6 +17,7 @@ const newsSchema = new Schema({
     validate: [arrayLimit, "{PATH} exceeds the limit of 100"],
   },
   image: String,
+  category: String,
 });
 
 function arrayLimit(val) {

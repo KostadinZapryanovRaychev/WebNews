@@ -19,13 +19,14 @@ module.exports.createArticle = async (req, res) => {
 };
 
 module.exports.createArticlePost = async (req, res) => {
-  const { title, author, content, createdAt, image } = req.body;
+  const { title, author, content, createdAt, image ,category} = req.body;
   const news = new News({
     title: title,
     author: author,
     content: content,
     createdAt: createdAt,
     image: image,
+    category:category
   });
   await news.save();
   res.redirect("/news");
@@ -63,13 +64,14 @@ module.exports.editArticle = async (req, res) => {
 
 module.exports.editArticlePost = async (req, res) => {
   const { id } = req.params;
-  const { title, author, content, createdAt, image } = req.body;
+  const { title, author, content, createdAt, image ,category} = req.body;
   const article = await News.findByIdAndUpdate(id, {
     title: title,
     author: author,
     content: content,
     createdAt: createdAt,
     image: image,
+    category:category
   });
   res.redirect("/news");
 };

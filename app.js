@@ -5,9 +5,13 @@ const User = require("./models/user");
 const session = require("express-session");
 const methodOverride = require("method-override");
 const app = express();
+
 const articleController = require("./controllers/articleController");
 const userController = require("./controllers/userController");
 const advirtiseController = require("./controllers/advirtiseController");
+const abouController = require("./controllers/aboutController");
+const errorController = require("./controllers/errorController");
+
 const passport = require("passport");
 const localStrategy = require("passport-local");
 
@@ -57,6 +61,7 @@ const requireLogin = (req, res, next) => {
   }
 };
 
+
 app.listen(3000, () => {
   console.log("Im listening on port 3000");
 });
@@ -103,6 +108,12 @@ app.delete(
   advirtiseController.deleteAdvirtise
 );
 
+app.get("/about", abouController.getAbout);
+
+//ERROR page
+app.get("/pavel" , errorController.getError);
+
 app.get("/", (req, res) => {
   res.redirect("/news");
 });
+

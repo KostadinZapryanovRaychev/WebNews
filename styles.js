@@ -15,6 +15,9 @@ function styles() {
         font-size: 18px;
         font-weight: normal;
       }
+      h1 {
+        margin-bottom: 20px;
+      }
       header ul {
         list-style: none;
         margin: 0;
@@ -120,7 +123,7 @@ function styles() {
         }
 
         .article {
-            width: 600px;
+            width: 500px;
             margin: 0 auto;
             padding: 20px;
             border: 1px solid #ccc;
@@ -150,6 +153,14 @@ function styles() {
             border: 1px solid #ccc;
             border-radius: 5px;
           }
+          select {
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+          }
           button[type="text"] {
             width: 60%;
             background-color: #00ccff;
@@ -163,6 +174,18 @@ function styles() {
             font-weight: bold;
             font: 18px Arial, Helvetica, sans-serif;
           }
+          .button-news {
+            width: 100%;
+            background-color: #00ccff;
+            color: white;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+
+
           button[type="submit"] {
             width: 100%;
             background-color: #00ccff;
@@ -172,6 +195,19 @@ function styles() {
             border: none;
             border-radius: 5px;
             cursor: pointer;
+          }
+          .header-category{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding: 3px;
+          }
+          .article {
+            background-color: #FFC0CB;
+          }
+          h2 {
+            margin-left:5px;
+            margin-right:5px;
           }
           form {
               background-color: #FFC0CB;
@@ -190,6 +226,20 @@ function styles() {
           }
           .comments {
             margin-top: 20px;
+          }
+
+          .container-about {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+          }
+          .img-about {
+            display: block;
+            margin: 0 auto;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
           }
           .comment {
             border: 1px solid #ccc;
@@ -259,6 +309,21 @@ function styles() {
           .my-h3.hidden {
             opacity: 0;
             visibility: hidden;
+          }
+
+          p {
+            margin-bottom: 20px;
+          }
+
+          .button-news {
+            width: 100%;
+            background-color: #00ccff;
+            color: white;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
           }
 
     `;

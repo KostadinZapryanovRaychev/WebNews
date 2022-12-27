@@ -13,9 +13,11 @@ function mainHtmlSkeleton(content, style, logged, advirtises) {
     </style>
   </head>
   <body>
-    <!-- Add the main content -->
     <header>
-    <h1>Kichuka News</h1>
+    <div class="header-category">
+     <h2><a href="/kichuka">Kichuka News</a></h2>
+     <h2><a href="/world">World News</a></h2>
+    </div>
     <ul>
       ${!logged ? `<li><a href="/login">Login</a></li>` : ""}
       <li><a href="/">Home</a></li>
@@ -25,10 +27,9 @@ function mainHtmlSkeleton(content, style, logged, advirtises) {
   </header>
   <aside class="aside-left">
   <div class="about-me">
-    <h3 class="my-h3">About the Owner</h3>
     <img src="https://m.media-amazon.com/images/I/611hBRJHcGL.jpg" alt="Profile picture of John Doe" class="flying-picture">
+    ${logged ? `${advirtises}` : "" }
     
-    ${advirtises}
 
     ${logged ? `<a href="/advirtises">All Advirtisement</a>` : ""}
     </div>
