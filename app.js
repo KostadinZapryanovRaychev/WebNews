@@ -114,10 +114,8 @@ app.delete(
 
 app.get("/about", abouController.getAbout);
 
-//ERROR page
-app.get("/pavel" , errorController.getError);
-
 app.get("/", (req, res) => {
   res.redirect("/news");
 });
 
+app.get("*", errorController.getError);
