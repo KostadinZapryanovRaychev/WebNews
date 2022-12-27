@@ -118,4 +118,5 @@ app.get("/", (req, res) => {
   res.redirect("/news");
 });
 
+// Any path not matching one of mine above will hit this ! :)
 app.get("*", errorController.getError);
