@@ -100,18 +100,25 @@ module.exports.addCommentPost = async (req, res) => {
   const { id } = req.params;
   const { author, content } = req.body;
 
-  const article = await News.findByIdAndUpdate(
-    id,
-    {
-      $push: {
-        comments: {
-          author: author,
-          content: content,
+  const article = await News.findById(id);
+
+  if (article.comments.length <= 99) {
+    const updatedArticle = await News.findByIdAndUpdate(
+      id,
+      {
+        $push: {
+          comments: {
+            author: author,
+            content: content,
+          },
         },
       },
-    },
-    { new: true }
-  );
+      { new: true }
+    );
+  
+    res.redirect(`/news/${id}`);
+  } else {
+    res.redirect(`/news/${id}`);
+  }
 
-  res.redirect(`/news/${id}`);
 };

@@ -7,12 +7,21 @@ const newsSchema = new Schema({
   createdAt: Date,
   author: String,
   content: String,
-  comments : [{
-    author : String,
-    content : String
-     }],
-  image:String,
+  comments: {
+    type: [
+      {
+        author: String,
+        content: String,
+      },
+    ],
+    validate: [arrayLimit, "{PATH} exceeds the limit of 100"],
+  },
+  image: String,
 });
+
+function arrayLimit(val) {
+  return val.length <= 100;
+}
 
 const News = mongoose.model("News", newsSchema);
 module.exports = News;
