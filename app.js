@@ -68,6 +68,10 @@ app.listen(3000, () => {
 
 app.get("/news", articleController.getAllArticles);
 
+app.get("/world", articleController.getAllWorldArticles);
+
+app.get("/kichuka", articleController.getAllKichukadArticles);
+
 app.post("/create", requireLogin, articleController.createArticlePost);
 
 app.get("/create", requireLogin, articleController.createArticle);

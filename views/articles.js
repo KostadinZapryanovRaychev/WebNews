@@ -108,7 +108,6 @@ function readArticleWithComments(article) {
 `;
 }
 
-
 function updateArticleView(article) {
   return `
       <style>
@@ -284,6 +283,41 @@ function readArticle(article) {
       `;
 }
 
+function createArticleListViewWorldNews(articles, dateFn, loggedUser) {
+  return `
+       <img src="https://m.media-amazon.com/images/I/611hBRJHcGL.jpg" alt="Avatar">
+       <div class="article"> 
+       ${
+         loggedUser
+           ? `<button class="button-news"><a href="/create">Create New Article</a></button>`
+           : `<button class="button-news" ><a href="/news">All News</a></button>`
+       }
+       
+       </div>
+       ${articles
+         .filter((article) => article.category === "World news")
+         .map(
+           (article) => `
+         <div class="article">
+            <h1>${article.title}</h1>
+            <p>By ${article.author}</p>
+            <p>${article.content}</p>
+            <p>${dateFn(article.createdAt)}</p>
+            <a href="news/${article._id}">See more</a>
+            ${loggedUser ? `<a href="news/${article._id}/edit">Edit</a>` : ""}
+            ${
+              loggedUser
+                ? `<a href="news/${article._id}/delete">Delete</a>`
+                : ""
+            }
+           
+         </div>
+       `
+         )
+         .join("")}
+      `;
+}
+
 module.exports = {
   createNewArticleView,
   createArticleListView,
@@ -291,4 +325,5 @@ module.exports = {
   updateArticleView,
   deleteArticle,
   readArticleWithComments,
+  createArticleListViewWorldNews,
 };

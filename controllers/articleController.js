@@ -48,6 +48,40 @@ module.exports.getAllArticles = async (req, res) => {
   res.send(html);
 };
 
+
+module.exports.getAllWorldArticles = async (req, res) => {
+  
+  const articles = await News.find({ category: "World news" }).sort({ createdAt: -1 });
+  const alladAvirtises = await Advirtise.find({})
+  const firsTAdvirtise = alladAvirtises[0];
+  const loggedUser = req.session.user_id;
+  const advirtises = advirtiseView.getAdvirtiseView(firsTAdvirtise);
+  const result = newsView.createArticleListView(
+    articles,
+    config.dateFormatter,
+    loggedUser
+  );
+  const html = mainContent(result, style, loggedUser, advirtises);
+  res.send(html);
+};
+
+module.exports.getAllKichukadArticles = async (req, res) => {
+  
+  const articles = await News.find({ category: "Kichuka news" }).sort({ createdAt: -1 });
+  const alladAvirtises = await Advirtise.find({})
+  const firsTAdvirtise = alladAvirtises[0];
+  const loggedUser = req.session.user_id;
+  const advirtises = advirtiseView.getAdvirtiseView(firsTAdvirtise);
+  const result = newsView.createArticleListView(
+    articles,
+    config.dateFormatter,
+    loggedUser
+  );
+  const html = mainContent(result, style, loggedUser, advirtises);
+  res.send(html);
+};
+
+
 module.exports.getArticle = async (req, res) => {
   const article = await News.findById(req.params.id);
   const html = newsView.readArticle(article);
